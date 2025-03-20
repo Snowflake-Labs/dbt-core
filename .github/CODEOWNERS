@@ -15,4 +15,4 @@
 
 ### ARTIFACTS
 
-/schemas/dbt                    @dbt-labs/cloud-artifacts
+/schemas/dbt                    @snowflake-labs/dbt-fork
