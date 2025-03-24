@@ -11,8 +11,8 @@
 
 # As a default for areas with no assignment,
 # the core team as a whole will be assigned
-*       @dbt-labs/core-team
+*       @snowflake-labs/dbt-fork
 
 ### ARTIFACTS
 
-/schemas/dbt                    @dbt-labs/cloud-artifacts
+/schemas/dbt                    @snowflake-labs/dbt-fork
