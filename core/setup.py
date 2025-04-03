@@ -84,7 +84,6 @@ setup(
         "daff>=1.3.46",
         "typing-extensions>=4.4",
         "opentelemetry-api == 1.26.0",
-        "opentelemetry-sdk == 1.26.0",
         # ----
     ],
     zip_safe=False,
