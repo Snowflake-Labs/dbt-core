@@ -66,5 +66,3 @@ test:
 about:
   home: https://github.com/dbt-labs/dbt-core
   summary: With dbt, data analysts and engineers can build analytics the way engineers build applications.
-  license: Apache-2.0
-  license_file: License.md
