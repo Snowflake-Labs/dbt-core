@@ -1,5 +1,5 @@
 {% set name = "dbt-core" %}
-{% set version = "1.10.15b" %}
+{% set version = "1.10.15c" %}
 
 package:
   name: {{ name|lower }}
@@ -35,7 +35,7 @@ requirements:
     - click >=8.0.2,<9.0
     - jsonschema >=4.19.1,<5.0
     - networkx >=2.3,<4.0
-    - protobuf >=6.0,<7.0
+    - protobuf >=5.0,<7.0
     - requests <3.0.0
     - pathspec >=0.9,<0.13
     - sqlparse >=0.5.0,<0.6.0
