@@ -9,6 +9,7 @@ import jinja2.nativetypes  # type: ignore
 import jinja2.nodes
 import jinja2.parser
 import jinja2.sandbox
+from opentelemetry import trace
 
 from dbt.artifacts.resources.types import FunctionLanguage
 from dbt.contracts.graph.nodes import GenericTestNode
@@ -58,6 +59,7 @@ class MacroGenerator(CallableMacroGenerator):
         super().__init__(macro, context)
         self.node = node
         self.stack = stack
+        self.macro_tracer = trace.get_tracer("dbt.runner")
 
     # This adds the macro's unique id to the node's 'depends_on'
     @contextmanager
@@ -78,9 +80,14 @@ class MacroGenerator(CallableMacroGenerator):
                 self.stack.pop(unique_id)
 
     # this makes MacroGenerator objects callable like functions
-    def __call__(self, *args, **kwargs):
-        with self.track_call():
-            return self.call_macro(*args, **kwargs)
+    def __call__(self, *args, **kwargs) -> Any:
+        if self.get_name() == "run_hooks" and args and args[0]:
+            span_name = kwargs["span_name"] if "span_name" in kwargs else "hook_span"
+            with self.track_call(), self.macro_tracer.start_as_current_span(span_name):
+                return self.call_macro(*args, **kwargs)
+        else:
+            with self.track_call():
+                return self.call_macro(*args, **kwargs)
 
 
 class UnitTestMacroGenerator(MacroGenerator):
