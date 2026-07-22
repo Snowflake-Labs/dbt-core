@@ -96,6 +96,9 @@ def preflight(func):
         flags = Flags(ctx)
         ctx.obj["flags"] = flags
         set_flags(flags)
+        get_invocation_context().enable_otel_instrumentation = getattr(
+            flags, "OTEL_INSTRUMENTATION", False
+        )
         get_event_manager().require_warn_or_error_handling = (
             flags.require_all_warnings_handled_by_warn_error
         )

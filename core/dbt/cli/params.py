@@ -700,6 +700,13 @@ single_threaded = _create_option_and_track_env_var(
     hidden=True,
 )
 
+otel_instrumentation = _create_option_and_track_env_var(
+    "--otel-instrumentation/--no-otel-instrumentation",
+    envvar="DBT_ENGINE_OTEL_INSTRUMENTATION",
+    help="Enable OpenTelemetry span instrumentation for node and hook execution.",
+    default=False,
+)
+
 show_all_deprecations = _create_option_and_track_env_var(
     "--show-all-deprecations/--no-show-all-deprecations",
     envvar=None,
